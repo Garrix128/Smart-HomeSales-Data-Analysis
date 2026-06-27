@@ -1,0 +1,304 @@
+/* === Claude Design System — Smart Home Analysis === */
+
+/* --- Design Tokens --- */
+:root {
+  /* Brand */
+  --color-primary: #cc785c;
+  --color-primary-active: #a9583e;
+  --color-primary-disabled: #e6dfd8;
+
+  /* Text */
+  --color-ink: #141413;
+  --color-body: #3d3d3a;
+  --color-body-strong: #252523;
+  --color-muted: #6c6a64;
+  --color-muted-soft: #8e8b82;
+
+  /* Surfaces */
+  --color-canvas: #faf9f5;
+  --color-surface-soft: #f5f0e8;
+  --color-surface-card: #efe9de;
+  --color-surface-cream-strong: #e8e0d2;
+  --color-surface-dark: #181715;
+  --color-surface-dark-elevated: #252320;
+  --color-surface-dark-soft: #1f1e1b;
+
+  /* On colors */
+  --color-on-primary: #ffffff;
+  --color-on-dark: #faf9f5;
+  --color-on-dark-soft: #a09d96;
+
+  /* Borders */
+  --color-hairline: #e6dfd8;
+  --color-hairline-soft: #ebe6df;
+
+  /* Accent */
+  --color-accent-teal: #5db8a6;
+  --color-accent-amber: #e8a55a;
+
+  /* Semantic */
+  --color-success: #5db872;
+  --color-warning: #d4a017;
+  --color-error: #c64545;
+
+  /* Typography */
+  --font-display: 'Cormorant Garamond', 'EB Garamond', 'Times New Roman', serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-code: 'JetBrains Mono', 'Fira Code', ui-monospace, monospace;
+
+  /* Spacing */
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 16px;
+  --space-lg: 24px;
+  --space-xl: 32px;
+  --space-xxl: 48px;
+
+  /* Radius */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-pill: 9999px;
+
+  /* Shadows — minimal, color-block depth philosophy */
+  --shadow-card: 0 1px 3px rgba(20, 20, 19, 0.06);
+  --shadow-card-hover: 0 2px 8px rgba(20, 20, 19, 0.10);
+}
+
+/* --- Global Reset --- */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.55;
+  color: var(--color-body);
+  background-color: var(--color-canvas);
+}
+
+/* --- Typography Utilities --- */
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--color-ink);
+}
+
+.display-lg {
+  font-family: var(--font-display);
+  font-size: 48px;
+  font-weight: 400;
+  line-height: 1.1;
+  letter-spacing: -1px;
+  color: var(--color-ink);
+}
+
+.display-md {
+  font-family: var(--font-display);
+  font-size: 36px;
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.5px;
+  color: var(--color-ink);
+}
+
+.display-sm {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  letter-spacing: -0.3px;
+  color: var(--color-ink);
+}
+
+.title-lg {
+  font-family: var(--font-body);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--color-ink);
+}
+
+.title-md {
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--color-ink);
+}
+
+.caption-uppercase {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* --- Link --- */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--color-primary-active);
+}
+
+/* --- Scrollbar --- */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-surface-cream-strong);
+  border-radius: var(--radius-pill);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-hairline);
+}
+
+/* --- Element Plus Overrides — Global --- */
+
+/* Override Element Plus primary color */
+:root {
+  --el-color-primary: var(--color-primary);
+  --el-color-primary-light-3: #d6997e;
+  --el-color-primary-light-5: #e0b5a1;
+  --el-color-primary-light-7: #ebd1c4;
+  --el-color-primary-light-8: #f0dfd5;
+  --el-color-primary-light-9: #f5ede7;
+  --el-color-primary-dark-2: #b56b50;
+  --el-color-success: var(--color-success);
+  --el-color-warning: var(--color-warning);
+  --el-color-danger: var(--color-error);
+  --el-bg-color: var(--color-canvas);
+  --el-bg-color-page: var(--color-canvas);
+  --el-bg-color-overlay: var(--color-canvas);
+  --el-text-color-primary: var(--color-ink);
+  --el-text-color-regular: var(--color-body);
+  --el-text-color-secondary: var(--color-muted);
+  --el-text-color-placeholder: var(--color-muted-soft);
+  --el-border-color: var(--color-hairline);
+  --el-border-color-light: var(--color-hairline-soft);
+  --el-border-radius-base: var(--radius-md);
+  --el-border-radius-small: var(--radius-sm);
+  --el-font-family: var(--font-body);
+}
+
+/* Override el-button primary */
+.el-button--primary {
+  --el-button-bg-color: var(--color-primary);
+  --el-button-border-color: var(--color-primary);
+  --el-button-hover-bg-color: var(--color-primary-active);
+  --el-button-hover-border-color: var(--color-primary-active);
+  --el-button-active-bg-color: var(--color-primary-active);
+  --el-button-active-border-color: var(--color-primary-active);
+  --el-button-disabled-bg-color: var(--color-primary-disabled);
+  --el-button-disabled-border-color: var(--color-primary-disabled);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  height: 40px;
+  border-radius: var(--radius-md);
+}
+
+/* Override el-card */
+.el-card {
+  background-color: var(--color-canvas);
+  border: 1px solid var(--color-hairline);
+  border-radius: var(--radius-lg);
+  box-shadow: none;
+}
+.el-card__header {
+  border-bottom: 1px solid var(--color-hairline-soft);
+  padding: var(--space-lg) var(--space-xl);
+}
+
+/* Override el-menu */
+.el-menu {
+  border-right: none;
+}
+
+/* Override el-table */
+.el-table {
+  --el-table-bg-color: transparent;
+  --el-table-tr-bg-color: transparent;
+  --el-table-header-bg-color: var(--color-surface-soft);
+  --el-table-row-hover-bg-color: var(--color-surface-card);
+  --el-table-border-color: var(--color-hairline);
+}
+.el-table th.el-table__cell {
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  background-color: var(--color-surface-soft);
+}
+
+/* Override el-dialog */
+.el-dialog {
+  border-radius: var(--radius-lg);
+  --el-dialog-bg-color: var(--color-canvas);
+}
+.el-dialog__header {
+  border-bottom: 1px solid var(--color-hairline-soft);
+}
+
+/* Override el-input */
+.el-input__wrapper {
+  border-radius: var(--radius-md);
+  box-shadow: 0 0 0 1px var(--color-hairline) inset;
+  background-color: var(--color-canvas);
+}
+.el-input__wrapper:hover {
+  box-shadow: 0 0 0 1px var(--color-muted-soft) inset;
+}
+.el-input.is-focus .el-input__wrapper {
+  box-shadow: 0 0 0 1px var(--color-primary) inset, 0 0 0 3px rgba(204, 120, 92, 0.12);
+}
+
+/* Override el-pagination */
+.el-pagination .el-pager li.is-active {
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+}
+
+/* Override el-tag */
+.el-tag {
+  border-radius: var(--radius-pill);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 13px;
+}
+
+/* Override el-form */
+.el-form-item__label {
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--color-body-strong);
+}
+
+/* Override el-select */
+.el-select .el-input.is-focus .el-input__wrapper {
+  box-shadow: 0 0 0 1px var(--color-primary) inset, 0 0 0 3px rgba(204, 120, 92, 0.12);
+}

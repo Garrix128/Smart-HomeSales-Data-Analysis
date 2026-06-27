@@ -1,0 +1,253 @@
+paragraphs=201
+002	Normal	align=CENTER (1)	大数据分析技术实践
+003	Normal	align=CENTER (1)	课程设计报告
+008	Normal	align=None	题    目：基于Spark的猫眼电影可视化系统开发
+009	Normal	align=None	学生姓名：刘培冉
+010	Normal	align=None	学    号：22125081017
+011	Normal	align=None	二级学院：信息工程学院
+012	Normal	align=None	专    业：数据科学与大数据技术
+013	Normal	align=None	班    级：2023级02班
+014	Normal	align=None	指导教师：胡贞华
+019	Normal	align=CENTER (1)	2024―2025学年第 一 学期
+024	Heading 1	align=None	实践目的
+025	Heading 2	align=None	1.1时代要求
+026	Normal	align=None	随着互联网和移动终端的普及，电影行业（如猫眼平台）积累了海量用户行为数据（如票房、评分、类型偏好等），需通过大数据技术挖掘数据价值，辅助行业决策（如影片排片、营销策略、用户画像分析）。本项目通过Spark 集群处理猫眼电影数据，体现了利用大数据技术解决大规模数据存储、清洗、分析的时代需求，符合 “数据驱动业务” 的行业趋势。
+027	Normal	align=None	传统数据呈现方式（如表格、静态图表）难以满足实时性、交互性需求。本项目采用ECharts 可视化工具和Django 搭建数据大屏，实现动态图表展示（如类型统计、票房 TOP10、评分占比等），能够帮助用户快速理解复杂数据，提升决策效率。
+028	Normal	align=None	电影行业需通过数据分析实现精准推荐（如文档中的 “电影推荐” 功能），满足用户个性化需求。基于 Spark的分布式计算能力，可高效处理用户行为数据，结合推荐算法（如协同过滤），提升用户观影体验。
+029	Heading 2	align=None	1.2教育要求
+030	Normal	align=None	本项目可以培养学生将理论知识转化为实际应用的能力。可以掌握 Spark 分布式计算框架（如文档中使用 PySpark 进行数据清洗、聚合）、Hadoop 集群搭建（虚拟机部署），理解分布式存储与计算原理。也涵盖数据爬取（Selenium+LXML）、清洗（Spark DataFrame）、存储（MySQL）、可视化（ECharts+Django）的完整链路，符合数据科学与大数据技术专业的核心培养目标。这一过程培养了我们在面对未知领域时的探索精神和解决问题的能力，提升了我们的综合素质，也为未来的学习和工作打下了坚实的基础。
+034	Heading 1	align=None	实践内容
+035	Heading 2	align=None	2.1使用技术栈
+036	Normal	align=None	LXML：高效的 HTML/XML 解析库，用于定位网页元素（如通过 XPath 提取电影名称、类型、票房等字段），配合 Selenium 完成数据结构化提取。在数据爬取阶段使用selenium库，模拟浏览器点击，之后使用lxml解析文档，定位网页元素。Selenium：用于模拟浏览器行为，自动化爬取猫眼电影页面数据（如电影链接、详细信息），解决动态渲染网页的数据获取问题。
+037	Normal	align=None	PySpark：基于 Python 的 Spark API，用于连接远端 Spark 集群，实现分布式数据清洗（如过滤无效数据、格式转换）、聚合分析（如类型统计、票房 TOP10 计算）。在数据存储，清洗阶段，使用pyspark连接远端的Spark集群，对数据进行存储与处理。
+038	Normal	align=None	Django：Python Web 框架，用于搭建系统后端（如路由转发、数据接口）和前端页面（登录、注册、数据大屏），实现用户交互与数据展示。在数据可视化阶段，使用Django框架中APP应用，作为数据的网页呈现。
+039	Heading 2	align=None	2.2数据收集
+040	Normal	align=None	数据来源于猫眼电影平台
+041	Heading 2	align=None	2.2可视化工具
+042	Normal	align=LEFT (0)	ECharts：ECharts 是一个强大的开源数据可视化库，广泛应用于网页和移动端的数据展示。它支持丰富的图表类型，如折线图、柱状图、雷达图、词云图等，能够通过简洁的配置展示复杂的数据关系。在本项目中，使用基于Echarts的可视化案例网站：makeapie，来快速实现交互性强，简洁优美的可视化图表。
+044	Heading 1	align=None	实践过程
+045	Heading 2	align=None	3.1准备阶段
+046	Normal	align=None	在本机中安装一台CentOS7虚拟机，再克隆成三台，作为Hadoop集群，Hive集群，Spark集群运行服务的机器。在集群的主节点机器上安装Anaconda平台，作为本物理机Pycharm的解释器，便于之后在本物理机中执行Spark调用，实现数据分析计算。在本物理机的Pycharm中创建一个Django项目，作为整个项目的存放，执行位置。
+047	Normal	align=None	下载Edge Driver，配置该浏览器驱动的环境变量，便于之后使用selenium库模拟浏览器，从而爬取数据。
+048	Heading 2	align=None	3.2数据处理
+049	Normal	align=None	使用selenium库在猫眼电影网站中爬取并存储所有电影的链接，之后通过遍历分别爬取每一个电影的详细信息。其每一个电影的详情链接的部分情况如图3-2-1所示。电影详细信息的部分情况如图3-2-2所示。
+051	Normal	align=CENTER (1)	图3-2-1：电影链接部分数据展示
+053	Normal	align=CENTER (1)	图3-2-2：电影详细信息部分数据展示
+054	Heading 2	align=None	3.3主要页面展示
+055	Normal	align=None	登录时需要输入个人的用户名和密码，当没有密码时，需要注册用户，登录界面如图3-3-1所示。
+057	Normal	align=CENTER (1)	图3-3-1：登录界面
+058	Normal	align=JUSTIFY (3)	注册界面需要制定密码和确认密码。注册界面如图3-3-2所示。
+060	Normal	align=CENTER (1)	图3-3-2：注册界面
+061	Normal	align=JUSTIFY (3)	本项目拥有数据大屏展示，我们可以通过数据大屏了解到猫眼电影的一些数据情况，数据大屏的界面如图3-3-3所示。
+063	Normal	align=CENTER (1)	图3-3-3：数据大屏界面
+064	Normal	align=JUSTIFY (3)	本项目的用户界面可以查看猫眼电影的数据可视化界面，可以观看电影数据的详细信息，也可以修改个人信息，获得推荐的电影，用户进入改系统之后的界面如下所图3-3-5所示。
+066	Normal	align=CENTER (1)	图3-3-5：用户使用界面
+068	Heading 2	align=None	3.4数据大屏界面详细展示
+069	Normal	align=None	数据大屏的主要作用时为了清晰有效地传达与沟通信息。其本质是视觉对话，通过将数据分析技术与图形技术结合，作为一种表现形式来清晰有效地对分析结果信息进行解读和传达。本系统的用户可以通过数据大屏从而了解猫眼电影的数据情况，知道各种类型电影，票房，评分等的大体情况。
+070	Heading 3	align=None	3.4.1类型统计可视化展示
+071	Normal	align=None	电影的类型数量占比的可视化展示如图3-4-1所示。
+073	Normal	align=CENTER (1)	图3-4-1：类型统计可视化展示
+074	Heading 3	align=None	3.4.2 TOP10电影详细想你想可视化展示
+075	Normal	align=None	TOP10电影的基础信息可视化展示如图3-4-2所示。
+077	Normal	align=CENTER (1)	图3-4-2：TOP10电影详细信息可视化展示
+078	Heading 3	align=None	3.4.3TOP10电影票房及评分数据可视化展示
+079	Normal	align=None	TOP10电影票房及评分的数据可视化展示如图3-4-3所示。
+081	Normal	align=CENTER (1)	图3-4-3：TOP10电影票房可视化展示
+082	Heading 3	align=None	3.4.4各种类型电影首周票房/总票房的可视化展示
+083	Normal	align=None	电影类型的首周票房和总票房的可视化展示如图3-4-4所示。
+085	Normal	align=CENTER (1)	图3-4-4：各种类型电影首周票房/总票房可视化展示
+086	Heading 3	align=None	3.4.5国家/地区电影发行数量的可视化展示
+087	Normal	align=None	国家或者地区电影发行数量的可视化展示如图3-4-5所示。
+089	Normal	align=CENTER (1)	图3-4-5：国家/地区电影发行数量可视化展示
+090	Heading 3	align=None	3.4.6电影星级评分占比的可视化展示
+091	Normal	align=None	电影星级评分占比的可视化展示如图3-4-6所示。
+093	Normal	align=CENTER (1)	图3-4-6：电影星级评分占比可视化展示
+094	Heading 3	align=None	3.4.7最高票房电影的信息呈现
+095	Normal	align=None	最高票房的电影其信息呈现如图3-4-7所示。
+096	Normal	align=CENTER (1)	图3-4-7：最高票房电影其信息
+097	Heading 2	align=None	3.5用户使用界面详细展示
+098	Heading 3	align=None	3.5.1系统框架部分展示
+099	Heading 4	align=None	3.5.1.1 用户操作菜单栏
+100	Normal	align=None	用户通过数据大屏上的系统按钮，可以跳转到用户系统界面来，用户系统主要通过左侧的菜单条来进行界面的跳转，用户可以通过这里跳转去自己想要的界面，例如：类型分析界面。如图3-5-1-1所示。
+102	Normal	align=CENTER (1)	图3-5-1-1：信息栏展示
+103	Heading 4	align=None	3.5.1.2用户简要操作
+104	Normal	align=None	用户可以通过右上角的头像呈现用户简要操作的信息框，通过信息框可以查看个人信息，查看个人收藏，查看大屏。如图3-5-1-2所示。
+106	Normal	align=CENTER (1)	图3-5-1-2：用户简要信息展示
+107	Heading 3	align=None	3.5.2类型分析界面展示
+108	Normal	align=None	类型分析界面是对猫眼电影的类型的数据分析，主要有三种，第一种类型中电影的TOP10票房，通过下拉选择框可以选择自己想要的查看的电影类型，同时可以知道该类型的评分分布情况，时长占比情况。类型TOP10票房情况如图3-5-2-1所示。对应类型的评分分布情况如图3-5-2-2所示。对于类型的电影平均时长情况如图3-5-2-3所示。
+110	Normal	align=CENTER (1)	图3-5-2-1：同一种类型的电影的票房可视化展示（部分）
+113	Normal	align=CENTER (1)	图3-5-2-2：同一种类型的电影的评分数量可视化展示（部分）
+115	Normal	align=CENTER (1)	图3-5-2-3：各种类型的电影时长占比可视化展示
+117	Heading 3	align=None	3.5.3评分分析界面展示
+118	Normal	align=None	评分分析界面是对猫眼电影的年度电影评分、国家或地区评分、类型评分的数据可视化分析展示。通过这些可视化展示，可以知道评分在不同维度的呈现，知晓电影质量的时间，空间的分布情况。年度电影评分如图3-5-3-1所示。国家或地区评分如图3-5-3-2所示。类型评分情况如图3-5-3-3所示。
+120	Normal	align=CENTER (1)	图3-5-3-1：年度平均分可视化展示
+122	Normal	align=CENTER (1)	图3-5-3-2：地区/国家评分可视化展示
+125	Normal	align=CENTER (1)	图3-5-3-2：类型评分可视化展示
+127	Heading 3	align=None	3.5.4时间分析界面展示
+128	Normal	align=None	时间分析界面是可以让用户的了解猫眼电影的年度发行数量，月度发行数量，时长占比情况。年度发行数量如图3-5-4-1所示。月度发行数量如图3-5-4-1所示。
+129	Normal	align=None	时长占比情况如图3-5-4-1所示。
+133	Normal	align=CENTER (1)	图3-5-4-1：年度电影数量可视化展示
+135	Normal	align=CENTER (1)	图3-5-4-2：月度电影数量可视化展示
+138	Normal	align=CENTER (1)	图3-5-4-3：时长分布占比可视化展示
+140	Heading 3	align=None	3.5.5票房分析界面展示
+141	Normal	align=None	票房分析界面可以让用户了解猫眼电影的每一种类型电影的票房情况，每一个国家或者地区的票房情况，每一年的票房情况。不同类型的票房情况如图3-5-5-1所示。国家或者地区的票房情况如图3-5-5-1所示。年度票房情况如图3-5-5-1所示。
+143	Normal	align=CENTER (1)	图3-5-5-1：类型票房可视化展示
+146	Normal	align=CENTER (1)	图3-5-5-2：国家/地区票房可视化展示
+149	Normal	align=CENTER (1)	图3-5-5-3：每年票房可视化展示
+151	Heading 3	align=None	3.5.6数据总览界面展示
+152	Normal	align=None	数据总览界面呈现的是电影的详细信息情况，主要的电影信息有电影名称，发行国家/地区，时长，评分和简介。用户可以通过每一步电影左侧的收藏按钮对电影进行收藏。数据总览界面如图3-5-6-1所示
+154	Normal	align=CENTER (1)	图3-5-6-1：电影详细信息展示
+156	Heading 3	align=None	3.5.7个人信息修改界面展示
+157	Normal	align=None	个人信息修改界面可以让用户对个人密码进行修改，其界面情况如图3-5-7-1所示。
+159	Normal	align=CENTER (1)	图3-5-7-1：个人信息修改界面展示
+161	Heading 3	align=None	3.5.8个人收藏界面展示
+162	Normal	align=None	在电影数据总览界面中，用户可以对电影进行收藏，收藏的电影集中呈现在个人收藏界面，收藏的电影分别以卡片的形式存在，通过点击图片可以跳转到电影在猫眼电影平台中的详细界面。另外，用户可以通过取消收藏的按钮取消对电影的收藏。
+164	Normal	align=CENTER (1)	图3-5-8-1：个人收藏界面展示
+166	Heading 3	align=None	3.5.9票房预测界面展示
+167	Normal	align=None	票房预测界面可以让用户输入电影类型，国家或取其以及首周票房，从而对电影的总票房进行预测，最终讲预测的总票房呈现在预测结果框中。票房预测界面如图3-5-9-1所示。
+169	Normal	align=CENTER (1)	图3-5-9-1：票房预测界面展示
+171	Heading 3	align=None	3.5.10电影推荐界面展示
+172	Normal	align=None	电影推荐使用基于用户的协同过滤算法，根据该用户与其余用户的相关性，从而为用户推荐电影，推荐的电影以卡片的形式呈现在电影推荐界面中，用户可以通过推荐收藏的按钮将该电影收藏起来，存放在收藏界面中，也可以查看电影的详细信息，从而知道自己喜不喜欢这些推荐的电影，其界面如图3-5-10-1所示。
+174	Normal	align=CENTER (1)	图3-5-10-1：电影推荐界面展示
+175	Heading 3	align=None	3.5.11词云图界面展示
+176	Normal	align=None	词云图界面展示的是猫眼电影平台中出现的词的频率情况。电影名称词云图如图3-5-11-1所示。导演词云图如图3-5-11-2所示。简介词云图如图3-5-11-3所示。
+178	Normal	align=CENTER (1)	图3-5-11-1：电影名称词云图可视化展示
+181	Normal	align=CENTER (1)	图3-5-11-2：导演词云图可视化展示
+183	Normal	align=CENTER (1)	图3-5-11-3：简介词云图可视化展示
+184	Heading 2	align=None	3.7部分代码展示
+185	Heading 3	align=None	3.7.1 Spark数据分析代码展示
+186	Normal	align=None	def save_to_mysql(result,table_name):
+    result.write.mode("overwrite"). \
+        format("jdbc"). \
+        option("url",
+               mysql_url1). \
+        option("dbtable", table_name). \
+        option("user", "root"). \
+        option("password", mysql_password1). \
+        option("encoding", "utf-8"). \
+        option("driver", "com.mysql.jdbc.Driver"). \
+        save()
+    # 保存表中类型这个字段
+    result.write.mode("overwrite").saveAsTable(table_name, "parquet")
+
+if __name__ == '__main__':
+    # 构建spark
+    spark = SparkSession.builder.appName("sparksQL").master("local[1]").\
+        config("spark.sql.shuffle.partitions", 2). \
+        config("spark.sql.warehouse.dir","/user/hive/warehouse").\
+        enableHiveSupport().\
+        getOrCreate()
+    # 获取catMovieData表
+    catMovieData = spark.read.table("catMovieData")
+
+    # 要求一：对类型进行统计
+    # 对表中的数据进行处理
+    explode_df = catMovieData.withColumn("type",explode(split(col("type"),"-")))
+    result1 = explode_df.groupBy("type").agg(count("type").alias("type_count"))
+    save_to_mysql(result1,"movieTypeCount")
+    spark.sql("select * from movieTypeCount").show()
+
+    # 要求二：票房top10
+    # sorted_df = catMovieData.orderBy(col("allBoxOffice").desc())
+    sorted_df = catMovieData.withColumn("allBoxOffice_num", F.col("allBoxOffice").cast("bigint")) \
+        .orderBy(F.col("allBoxOffice_num").desc())
+    result2 = sorted_df.limit(10)
+
+    save_to_mysql(result2,"movieBoxOfficeTop10")
+    spark.sql("select * from movieBoxOfficeTop10").show()
+
+    # 要求三：类型的首周票房和总票房
+    result3 = explode_df.filter(
+        (col("firstBoxOffice") != 0) & (col("allBoxOffice") != 0)  # 过滤掉票房为0的数据
+    ).groupBy("type").agg(
+        sum("firstBoxOffice").alias("total_FirstBoxOffice"),  # 计算首周票房总和
+        sum("allBoxOffice").alias("total_AllBoxOffice")  # 计算总票房总和
+    )
+187	Heading 3	align=None	3.7.2路由转发代码展示
+188	Normal	align=None	from django.contrib import admin
+from django.urls import path,include
+from myApp import views
+urlpatterns = [
+    path("index/", views.index,name="index"),
+    path("chartOne/", views.chartOne,name="chartOne"),
+    path("rateChart/", views.rateChart,name="rateChart"),
+    path("timeChart/", views.timeChart,name="timeChart"),
+    path("tableMovie/", views.tableMovie,name="tableMovie"),
+    path("userMessage/", views.userMessage,name="userMessage"),
+    path("collectData/", views.collectData, name="collectData"),
+    path("boxOfficePredict/", views.boxOfficePredict,name="boxOfficePredict"),
+    path("movieSugg/", views.movieSugg,name="movieSugg"),
+    path("wordCloud/", views.wordCloud, name="wordCloud"),
+    path("addHistory/<int:movieId>", views.addHistory,name="addHistory"),
+    path("delHistory/<int:movieId>", views.delHistory,name="delHistory"),
+    path("boxOfficeChart/", views.boxOfficeChart,name="boxOfficeChart"),
+    path("login/", views.login,name="login"),
+    path("register/", views.register,name="register"),
+    path("logOut/", views.logOut,name="logOut"),
+]
+189	Heading 3	align=None	3.7.3预测算法代码展示
+190	Normal	align=None	def load_data():
+    # 获取当前脚本所在目录的绝对路径
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # 构建CSV文件的绝对路径
+    csv_path = os.path.join(script_dir, 'newMovieMessage.csv')
+    data = pd.read_csv(csv_path)
+    le_type = LabelEncoder()
+    le_country = LabelEncoder()
+    data['type'] = le_type.fit_transform(data['type'])
+    data['country'] = le_country.fit_transform(data['country'])
+    x = data[['type', 'country', 'firstBoxOffice']]
+    y = data['allBoxOffice']
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_size=0.2, random_state=42)
+    # 使用scikit-learn的随机森林回归器
+    model = RandomForestRegressor(n_estimators=100, random_state=42)
+    model.fit(x_train, y_train)
+    return le_type,le_country,model
+def predict_boxOffice(movie_type, country, first_boxOffice):
+    le_type,le_country,model = load_data()
+    movie_type_encode = le_type.transform([movie_type])[0]
+    country_encode = le_country.transform([country])[0]
+    input_features = [[movie_type_encode, country_encode, float(first_boxOffice)]]  # 转换首周票房为浮点数
+    predict_boxResult = model.predict(input_features)[0]
+    return predict_boxResult
+191	Heading 3	align=None	3.7.4推荐算法代码展示
+192	Normal	align=None	def user_col_filter(user_name,user_ratings,top_n=5):
+    # 获得传入的用户收藏的电影
+    target_user_ratings = user_ratings[user_name]
+    if not target_user_ratings:
+        return []
+    else:
+        user_similarity_scopes = {}
+        # 转变为np
+        target_user_ratings_list = np.array([
+            ratings for _,ratings in target_user_ratings.items()
+        ])
+        for user,ratings in user_ratings.items():
+            # 获取除了该用户之外的其余用户收藏的电影，当用户与所传入的用户一致时，跳过该循环
+            if user == user_name:
+                continue
+            # 将其余用户的收藏电影转化为np
+            user_ratings_list = np.array([
+                ratings.get(item,0) for item in target_user_ratings
+            ])
+            # 计算传入的用户与其余用户的相关分数，并存入user_similarity_scopes字典中
+            similarity_score = cosine_similarity([user_ratings_list,target_user_ratings_list])[0][0]
+            user_similarity_scopes[user] = similarity_score
+        # 对相关分数进行排序，获取
+        sorted_similarity_user = sorted(user_similarity_scopes.items(),key=lambda x:x[1],reverse=True)
+        recommend_items = set()
+        # 只取其中与所传入用户相似度最高的top_n个用户所收藏的电影，并通过集合去除掉其中重复的
+        for similar_user,_ in sorted_similarity_user[:top_n]:
+            recommend_items.update(user_ratings[similar_user].keys())
+        # 排除用户自身已经收藏的电影，剩下的就是推荐的电影
+        recommend_items = [item for item in recommend_items if item not in target_user_ratings]
+        print(recommend_items)
+        return recommend_items
+193	Heading 1	align=None	实践体会
+194	Normal	align=None	在本次实验中，本人学习到了许多知识，在不断的调试中，遇见了许多问题，同样也解决了许多问题，虽然遇见的问题不是通过自己解决，而是通过询问AI，查找网上资料尝试出来的，但是还是收获颇丰。
+195	Normal	align=None	在搭建虚拟机集群时，遇到三台虚拟机之间互不通信，反复查找，没有发现/etc/profile和/etc/hosts配置文件配置错误，关闭防火墙之后还是无法ping通，查找本物理机中关于VMwareWorkstation的网络服务，发现是开启的，尝试多种方法之后还是无法互相通信，最终通过恢复默认的网络配置，让VMwareWorkStation重新安装网络配置才成功让三台虚拟机之间互相通信。
+196	Normal	align=None	在一次重新开机之后，发现无法通过FinalShell重新连接虚拟机，通过多次验证，发现不是防火墙重新自动开启导致问题发生，不是IP地址自行变化，因为已经将DHCP服务关闭，设置成了静态，但是通过ifconfig发现没有ens33网络，之后，在网上找到一篇帖子，知晓到本虚拟机的系统存在NetworkManager和network.service两种网络服务，由于两者同时运行，导致NetworkManager覆盖了network.servie，这也就是前文中提到ifconfig之后无法看到ens33ip地址，所以关闭NetworkManager服务，并重启网络服务，就可以重新使得虚拟机系统的网络服务生效，也就可以再次通过FinalShell远程连接虚拟机器。
+197	Normal	align=None	在一次启用MySQL时，出现socket错误，客户端尝试通过 /tmp/mysql.sock这个套接字文件连接本地 MySQL 服务器，但实际服务器使用的套接字文件路径并非 /tmp/mysql.sock，导致连接失败。在 UNIX 和 Linux 系统中，MySQL 客户端使用 /tmp/mysql.sock作为套接字文件，主要原因是 该路径是 MySQL 设计的默认本地套接字路径。而在/etc/my.cnf中socket=/var/lib/mysql/mysql.sock 。解决这个问题就将/etc/my.cnf中socket改成/tmp/mysql.sock，再重启MySQL。
+198	Normal	align=None	以上只是遇见的部分问题，通过解决这些问题，我有了更多解决问题的经验，同时心态变得更从容。
+
+tables=0

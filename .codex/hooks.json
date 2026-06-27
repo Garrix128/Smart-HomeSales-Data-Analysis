@@ -1,0 +1,14 @@
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import json; content=open('D:\\软件工程实践（作业管理系统）\\.codex\\hooks\\skill-auto-detect.md',encoding='utf-8').read(); print(json.dumps({'hookSpecificOutput':{'hookEventName':'UserPromptSubmit','additionalContext':content}}))\""
+          }
+        ]
+      }
+    ]
+  }
+}

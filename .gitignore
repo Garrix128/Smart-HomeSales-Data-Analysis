@@ -1,0 +1,67 @@
+# Java
+*.class
+*.log
+*.jar
+*.war
+*.ear
+target/
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Node
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.DS_Store
+dist/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Database
+*.db
+*.sqlite
+
+# HDFS
+hdfs_data/
+
+# Python输出
+python_analysis/output/
+python_analysis/*.parquet
+python_analysis/*.csv
+

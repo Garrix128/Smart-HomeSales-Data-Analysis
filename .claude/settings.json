@@ -1,0 +1,88 @@
+{
+  "commands": {
+    "brainstorm": {
+      "description": "Use before any creative work - explores user intent, requirements and design before implementation",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/brainstorming/SKILL.md. Announce: 'Using brainstorming skill.' Then proceed with the task."
+    },
+    "write-plan": {
+      "description": "Use when you have spec/requirements for a multi-step task, before touching code",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/writing-plans/SKILL.md. Announce: 'Using writing-plans skill.' Then proceed with the task."
+    },
+    "execute-plan": {
+      "description": "Use when you have a written implementation plan to execute with review checkpoints",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/executing-plans/SKILL.md. Announce: 'Using executing-plans skill.' Then proceed with the task."
+    },
+    "tdd": {
+      "description": "Use when implementing any feature or bugfix - write tests before implementation code",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/test-driven-development/SKILL.md. Announce: 'Using TDD skill.' Then proceed with the task."
+    },
+    "subagent-dev": {
+      "description": "Use when executing implementation plans with independent tasks in the current session",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/subagent-driven-development/SKILL.md. Announce: 'Using subagent-driven-development skill.' Then proceed with the task."
+    },
+    "verify": {
+      "description": "Use before claiming work is complete - requires fresh verification evidence",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/verification-before-completion/SKILL.md. Announce: 'Using verification-before-completion skill.' Then proceed with the task."
+    },
+    "worktree": {
+      "description": "Use when starting feature work that needs isolation from current workspace",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/using-git-worktrees/SKILL.md. Announce: 'Using git-worktrees skill.' Then proceed with the task."
+    },
+    "finish-branch": {
+      "description": "Use when implementation is complete, all tests pass, and you need to integrate the work",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/finishing-a-development-branch/SKILL.md. Announce: 'Using finishing-a-development-branch skill.' Then proceed with the task."
+    },
+    "request-review": {
+      "description": "Use when completing tasks or before merging to verify work meets requirements",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/requesting-code-review/SKILL.md. Announce: 'Using requesting-code-review skill.' Then proceed with the task."
+    },
+    "receive-review": {
+      "description": "Use when receiving code review feedback, before implementing suggestions",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/receiving-code-review/SKILL.md. Announce: 'Using receiving-code-review skill.' Then proceed with the task."
+    },
+    "parallel-agents": {
+      "description": "Use when facing 2+ independent tasks that can be worked on without shared state",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/dispatching-parallel-agents/SKILL.md. Announce: 'Using dispatching-parallel-agents skill.' Then proceed with the task."
+    },
+    "debug": {
+      "description": "Use when encountering any bug, test failure, or unexpected behavior - find root cause first",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/systematic-debugging/SKILL.md. Announce: 'Using systematic-debugging skill.' Then proceed with the task."
+    },
+    "write-skill": {
+      "description": "Use when creating new skills, editing existing skills, or verifying skills work",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/writing-skills/SKILL.md. Announce: 'Using writing-skills skill.' Then proceed with the task."
+    },
+    "superpowers": {
+      "description": "Establishes how to find and use skills - invoke before ANY response including clarifying questions",
+      "prompt": "Read and follow the skill at .claude/skills/superpowers/using-superpowers/SKILL.md. Announce: 'Using using-superpowers skill.' Then proceed with the task."
+    },
+    "plan-files": {
+      "description": "File-based planning to organize and track progress on complex tasks (Manus-style)",
+      "prompt": "Read and follow the skill at .claude/skills/planning-with-files/SKILL.md. Announce: 'Using planning-with-files skill.' Then proceed with the task."
+    },
+    "ui-ux": {
+      "description": "UI/UX design optimization - icon systems, visual hierarchy, interaction patterns, design polish",
+      "prompt": "Read and follow the skill at .claude/skills/ui-ux-pro-max/SKILL.md. Announce: 'Using ui-ux-pro-max skill.' Then proceed with the task."
+    },
+    "gh-cli": {
+      "description": "GitHub CLI comprehensive reference for repos, issues, PRs, Actions, releases, and all GitHub operations",
+      "prompt": "Read and follow the skill at .claude/skills/gh-cli/SKILL.md. Announce: 'Using gh-cli skill.' Then proceed with the task."
+    },
+    "frontend-design": {
+      "description": "Create distinctive, production-grade frontend interfaces with high design quality",
+      "prompt": "Read and follow the skill at .claude/skills/frontend-design/SKILL.md. Announce: 'Using frontend-design skill.' Then proceed with the task."
+    }
+  },
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import json; content=open('.claude/hooks/skill-auto-detect.md',encoding='utf-8').read(); print(json.dumps({'hookSpecificOutput':{'hookEventName':'UserPromptSubmit','additionalContext':content}}))\""
+          }
+        ]
+      }
+    ]
+  }
+}

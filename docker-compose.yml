@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:5.6
+    container_name: smart_home_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: smart_home
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Smart_Home_Analysis/src/main/resources/db/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    networks:
+      - smart_home_network
+
+  backend:
+    build:
+      context: ./Smart_Home_Analysis
+      dockerfile: Dockerfile
+    container_name: smart_home_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/smart_home?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
+    networks:
+      - smart_home_network
+
+  frontend:
+    build:
+      context: ./Smart_Home_Analysis/frontend
+      dockerfile: Dockerfile
+    container_name: smart_home_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - smart_home_network
+
+volumes:
+  mysql_data:
+
+networks:
+  smart_home_network:
+    driver: bridge
+
+
+
